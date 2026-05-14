@@ -4,6 +4,8 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
+import { createClient } from "@/lib/supabase/client";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { useUIStore } from "@/stores/ui-store";
@@ -19,6 +21,7 @@ import {
   Trophy,
   Flame,
   Crown,
+  Shield,
   ChevronLeft,
   ChevronRight,
 } from "lucide-react";
@@ -39,6 +42,16 @@ export function Sidebar() {
   const pathname = usePathname();
   const { sidebarOpen, toggleSidebar } = useUIStore();
   const { t } = useI18nStore();
+  const [isAdmin, setIsAdmin] = useState(false);
+  const supabase = createClient();
+
+  useEffect(() => {
+    supabase.auth.getUser().then(({ data: { user } }) => {
+      if (user?.email === "admin@gmail.com") {
+        setIsAdmin(true);
+      }
+    });
+  }, [supabase.auth]);
 
   return (
     <motion.aside
@@ -94,6 +107,36 @@ export function Sidebar() {
             </Link>
           );
         })}
+        {isAdmin && (
+          <Link href="/admin">
+            <div
+              className={cn(
+                "flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-all duration-200 mt-4 border-t border-sidebar-border pt-4",
+                pathname === "/admin"
+                  ? "bg-sidebar-accent text-sidebar-primary"
+                  : "text-sidebar-foreground/70 hover:bg-sidebar-accent/50 hover:text-sidebar-foreground"
+              )}
+            >
+              <Shield className="h-5 w-5 shrink-0 text-destructive" />
+              {sidebarOpen && (
+                <motion.span
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  className="text-destructive font-bold"
+                >
+                  {t("admin")}
+                </motion.span>
+              )}
+              {pathname === "/admin" && sidebarOpen && (
+                <motion.div
+                  layoutId="activeNav"
+                  className="absolute left-0 h-8 w-1 rounded-r-full bg-destructive"
+                  transition={{ type: "spring", bounce: 0.2 }}
+                />
+              )}
+            </div>
+          </Link>
+        )}
       </nav>
 
       {/* Toggle */}

@@ -34,8 +34,13 @@ export default function LoginPage() {
       return;
     }
 
-    toast.success("Welcome back, adventurer!");
-    router.push("/dashboard");
+    if (email === "admin@gmail.com") {
+      toast.success("Welcome to the Admin Panel!");
+      router.push("/admin");
+    } else {
+      toast.success("Welcome back, adventurer!");
+      router.push("/dashboard");
+    }
     router.refresh();
   };
 
