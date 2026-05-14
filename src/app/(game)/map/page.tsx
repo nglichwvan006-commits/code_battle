@@ -12,6 +12,7 @@ import { Lock, CheckCircle2, Swords } from "lucide-react";
 import { ZONES } from "@/constants/zones";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { cn } from "@/lib/utils";
 
 export default function MapPage() {
   const supabase = createClient();
