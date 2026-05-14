@@ -31,7 +31,7 @@ export default function LeaderboardPage() {
   const { data: leaderboard, isLoading } = useQuery({
     queryKey: ["leaderboard", sortBy],
     queryFn: async () => {
-      let query = supabase
+      const query = supabase
         .from("characters")
         .select("id, name, class_id, level, exp, gold, profile_id")
         .order(sortBy === "problems" || sortBy === "streak" ? "level" : sortBy, {

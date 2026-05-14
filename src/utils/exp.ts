@@ -17,3 +17,25 @@ export function calculateLevelFromExp(totalExp: number): number {
   }
   return level;
 }
+
+/**
+ * Returns full level information for the UI
+ */
+export function calculateLevel(totalExp: number) {
+  let level = 1;
+  let remainingExp = totalExp;
+  let reqExp = calculateRequiredExp(level);
+
+  while (remainingExp >= reqExp) {
+    remainingExp -= reqExp;
+    level++;
+    reqExp = calculateRequiredExp(level);
+  }
+
+  return {
+    level,
+    currentExp: remainingExp,
+    requiredExp: reqExp,
+    totalExp,
+  };
+}

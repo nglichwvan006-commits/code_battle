@@ -8,7 +8,7 @@ import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Skeleton } from "@/components/ui/skeleton";
 import { FadeIn } from "@/components/animation/fade-in";
-import { Lock, CheckCircle2, Skull } from "lucide-react";
+import { Lock, CheckCircle2 } from "lucide-react";
 import { ZONES } from "@/constants/zones";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";

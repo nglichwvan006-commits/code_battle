@@ -66,7 +66,7 @@ function QuickAction({
 
 export default function DashboardPage() {
   const supabase = createClient();
-  const { character, setCharacter } = useGameStore();
+  const { setCharacter } = useGameStore();
 
   const { data: charData, isLoading } = useQuery({
     queryKey: ["character"],
