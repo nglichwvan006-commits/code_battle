@@ -5,6 +5,8 @@ import { motion } from "framer-motion";
 import { useQuery } from "@tanstack/react-query";
 import { createClient } from "@/lib/supabase/client";
 import { useGameStore } from "@/stores/game-store";
+import { useI18nStore } from "@/stores/i18n-store";
+import { DictionaryKey } from "@/i18n/dictionaries";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { CharacterShowcase } from "@/components/game/character-showcase";
@@ -67,6 +69,7 @@ function QuickAction({
 export default function DashboardPage() {
   const supabase = createClient();
   const { setCharacter } = useGameStore();
+  const { t } = useI18nStore();
 
   const { data: charData, isLoading } = useQuery({
     queryKey: ["character"],
@@ -143,13 +146,13 @@ export default function DashboardPage() {
     return (
       <FadeIn className="flex flex-col items-center justify-center py-24">
         <div className="mb-4 text-6xl">⚔️</div>
-        <h2 className="mb-2 text-2xl font-bold">No Character Yet</h2>
+        <h2 className="mb-2 text-2xl font-bold">{t("noCharacter")}</h2>
         <p className="mb-6 text-muted-foreground">
-          Create your hero to begin the adventure
+          {t("createCharacter")}
         </p>
         <Link href="/character/create">
           <Button variant="game" size="lg">
-            Create Character
+            {t("createBtn")}
           </Button>
         </Link>
       </FadeIn>
@@ -166,11 +169,11 @@ export default function DashboardPage() {
       {/* Welcome */}
       <motion.div variants={item}>
         <h1 className="text-2xl font-bold">
-          Welcome back,{" "}
+          {t("welcomeBack")},{" "}
           <span className="text-gradient-purple">{charData.name}</span>
         </h1>
         <p className="text-sm text-muted-foreground">
-          Continue your adventure and level up your skills
+          {t("continueAdventure")}
         </p>
       </motion.div>
 
@@ -186,7 +189,7 @@ export default function DashboardPage() {
             <CardHeader className="pb-3">
               <CardTitle className="flex items-center gap-2 text-lg">
                 <TrendingUp className="h-5 w-5 text-exp" />
-                Progress
+                {t("progress")}
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
@@ -194,13 +197,13 @@ export default function DashboardPage() {
               <div className="grid grid-cols-2 gap-3">
                 <div className="rounded-lg bg-secondary p-3 text-center">
                   <p className="text-2xl font-bold">{stats?.problemsSolved || 0}</p>
-                  <p className="text-xs text-muted-foreground">Solved</p>
+                  <p className="text-xs text-muted-foreground">{t("solved")}</p>
                 </div>
                 <div className="rounded-lg bg-secondary p-3 text-center">
                   <p className="text-2xl font-bold">
                     {stats?.achievementsUnlocked || 0}
                   </p>
-                  <p className="text-xs text-muted-foreground">Achievements</p>
+                  <p className="text-xs text-muted-foreground">{t("unlocked")}</p>
                 </div>
               </div>
             </CardContent>
@@ -210,14 +213,14 @@ export default function DashboardPage() {
 
       {/* Quick Actions */}
       <motion.div variants={item}>
-        <h2 className="mb-4 text-lg font-semibold">Quick Actions</h2>
+        <h2 className="mb-4 text-lg font-semibold">{t("quickActions")}</h2>
         <div className="grid grid-cols-3 gap-3 sm:grid-cols-6">
-          <QuickAction href="/problems" icon={Code} label="Problems" color="#8b5cf6" />
-          <QuickAction href="/map" icon={Map} label="World Map" color="#3b82f6" />
-          <QuickAction href="/quests" icon={Swords} label="Quests" color="#ef4444" />
-          <QuickAction href="/achievements" icon={Trophy} label="Trophies" color="#f59e0b" />
-          <QuickAction href="/leaderboard" icon={Flame} label="Rankings" color="#10b981" />
-          <QuickAction href="/inventory" icon={Swords} label="Inventory" color="#ec4899" />
+          <QuickAction href="/problems" icon={Code} label={t("problems")} color="#8b5cf6" />
+          <QuickAction href="/map" icon={Map} label={t("map")} color="#3b82f6" />
+          <QuickAction href="/quests" icon={Swords} label={t("quests")} color="#ef4444" />
+          <QuickAction href="/achievements" icon={Trophy} label={t("achievements")} color="#f59e0b" />
+          <QuickAction href="/leaderboard" icon={Flame} label={t("leaderboard")} color="#10b981" />
+          <QuickAction href="/inventory" icon={Swords} label={t("inventory")} color="#ec4899" />
         </div>
       </motion.div>
 
@@ -227,7 +230,7 @@ export default function DashboardPage() {
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-lg">
               <Swords className="h-5 w-5 text-destructive" />
-              Daily Quests
+              {t("dailyQuests")}
             </CardTitle>
           </CardHeader>
           <CardContent>

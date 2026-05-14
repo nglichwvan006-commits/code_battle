@@ -1,10 +1,14 @@
 "use client";
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { useUIStore } from "@/stores/ui-store";
+import { useI18nStore } from "@/stores/i18n-store";
+import { DictionaryKey } from "@/i18n/dictionaries";
 import {
   LayoutDashboard,
   Swords,
@@ -20,20 +24,21 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-const NAV_ITEMS = [
-  { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
-  { href: "/problems", label: "Problems", icon: Code },
-  { href: "/map", label: "World Map", icon: Map },
-  { href: "/inventory", label: "Inventory", icon: Backpack },
-  { href: "/pets", label: "Pets", icon: Cat },
-  { href: "/quests", label: "Quests", icon: Swords },
-  { href: "/achievements", label: "Achievements", icon: Trophy },
-  { href: "/leaderboard", label: "Leaderboard", icon: Crown },
+const NAV_ITEMS: { href: string; i18nKey: DictionaryKey; icon: React.ComponentType<{ className?: string }> }[] = [
+  { href: "/dashboard", i18nKey: "dashboard", icon: LayoutDashboard },
+  { href: "/problems", i18nKey: "problems", icon: Code },
+  { href: "/map", i18nKey: "map", icon: Map },
+  { href: "/inventory", i18nKey: "inventory", icon: Backpack },
+  { href: "/pets", i18nKey: "pets", icon: Cat },
+  { href: "/quests", i18nKey: "quests", icon: Swords },
+  { href: "/achievements", i18nKey: "achievements", icon: Trophy },
+  { href: "/leaderboard", i18nKey: "leaderboard", icon: Crown },
 ];
 
 export function Sidebar() {
   const pathname = usePathname();
   const { sidebarOpen, toggleSidebar } = useUIStore();
+  const { t } = useI18nStore();
 
   return (
     <motion.aside
@@ -75,7 +80,7 @@ export function Sidebar() {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                   >
-                    {item.label}
+                    {t(item.i18nKey)}
                   </motion.span>
                 )}
                 {isActive && sidebarOpen && (

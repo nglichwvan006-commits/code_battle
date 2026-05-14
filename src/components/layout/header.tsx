@@ -8,6 +8,8 @@ import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { LogOut, Menu } from "lucide-react";
 import { toast } from "sonner";
+import { ThemeToggle } from "./theme-toggle";
+import { LanguageToggle } from "./language-toggle";
 
 export function Header() {
   const router = useRouter();
@@ -51,9 +53,9 @@ export function Header() {
         )}
       </div>
 
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-2">
         {character && (
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-4 mr-2">
             <div className="flex items-center gap-1.5">
               <span className="text-lg">💰</span>
               <span className="text-sm font-semibold text-gold">
@@ -62,7 +64,9 @@ export function Header() {
             </div>
           </div>
         )}
-        <Button variant="ghost" size="icon" onClick={handleSignOut}>
+        <LanguageToggle />
+        <ThemeToggle />
+        <Button variant="ghost" size="icon" onClick={handleSignOut} title="Logout">
           <LogOut className="h-4 w-4" />
         </Button>
       </div>

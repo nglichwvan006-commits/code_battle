@@ -70,6 +70,63 @@
    ============================== */
 
 :root {
+  --background: oklch(0.98 0.01 280);
+  --foreground: oklch(0.14 0.02 280);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.14 0.02 280);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.14 0.02 280);
+  --primary: oklch(0.60 0.18 280);
+  --primary-foreground: oklch(0.98 0.01 280);
+  --secondary: oklch(0.96 0.01 280);
+  --secondary-foreground: oklch(0.20 0.02 280);
+  --muted: oklch(0.96 0.01 280);
+  --muted-foreground: oklch(0.55 0.02 280);
+  --accent: oklch(0.94 0.02 280);
+  --accent-foreground: oklch(0.14 0.02 280);
+  --destructive: oklch(0.55 0.20 25);
+  --destructive-foreground: oklch(0.98 0.01 25);
+  --border: oklch(0.90 0.02 280);
+  --input: oklch(0.90 0.02 280);
+  --ring: oklch(0.60 0.18 280);
+
+  /* Charts */
+  --chart-1: oklch(0.60 0.18 280);
+  --chart-2: oklch(0.55 0.15 160);
+  --chart-3: oklch(0.65 0.12 60);
+  --chart-4: oklch(0.50 0.18 320);
+  --chart-5: oklch(0.60 0.15 30);
+
+  /* Sidebar */
+  --sidebar: oklch(0.98 0.01 280);
+  --sidebar-foreground: oklch(0.14 0.02 280);
+  --sidebar-primary: oklch(0.60 0.18 280);
+  --sidebar-primary-foreground: oklch(0.98 0.01 280);
+  --sidebar-accent: oklch(0.94 0.02 280);
+  --sidebar-accent-foreground: oklch(0.14 0.02 280);
+  --sidebar-border: oklch(0.90 0.02 280);
+  --sidebar-ring: oklch(0.60 0.18 280);
+
+  --radius: 0.75rem;
+
+  /* RPG-specific */
+  --gold: oklch(0.70 0.16 85);
+  --gold-foreground: oklch(0.98 0.01 85);
+  --exp: oklch(0.55 0.20 145);
+  --exp-foreground: oklch(0.98 0.01 145);
+  --hp: oklch(0.55 0.22 25);
+  --mana: oklch(0.50 0.22 260);
+  --rarity-common: oklch(0.50 0.02 280);
+  --rarity-uncommon: oklch(0.55 0.18 145);
+  --rarity-rare: oklch(0.50 0.22 260);
+  --rarity-epic: oklch(0.50 0.22 310);
+  --rarity-legendary: oklch(0.65 0.16 65);
+  --difficulty-easy: oklch(0.55 0.18 145);
+  --difficulty-medium: oklch(0.65 0.16 85);
+  --difficulty-hard: oklch(0.55 0.22 25);
+}
+
+.dark {
   --background: oklch(0.12 0.02 280);
   --foreground: oklch(0.95 0.01 280);
   --card: oklch(0.16 0.025 280);
