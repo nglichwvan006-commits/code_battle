@@ -281,7 +281,7 @@ CREATE TRIGGER tr_streaks_updated_at BEFORE UPDATE ON streaks FOR EACH ROW EXECU
 CREATE OR REPLACE FUNCTION handle_new_user()
 RETURNS TRIGGER AS $$
 BEGIN
-  INSERT INTO profiles (id, username, role)
+  INSERT INTO public.profiles (id, username, role)
   VALUES (
     NEW.id,
     COALESCE(NEW.raw_user_meta_data->>'username', split_part(NEW.email, '@', 1)),
