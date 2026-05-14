@@ -6,7 +6,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { useUIStore } from "@/stores/ui-store";
 import { useI18nStore } from "@/stores/i18n-store";
@@ -27,15 +27,15 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-const NAV_ITEMS: { href: string; i18nKey: DictionaryKey; icon: React.ComponentType<{ className?: string }> }[] = [
-  { href: "/dashboard", i18nKey: "dashboard", icon: LayoutDashboard },
-  { href: "/problems", i18nKey: "problems", icon: Code },
-  { href: "/map", i18nKey: "map", icon: Map },
-  { href: "/inventory", i18nKey: "inventory", icon: Backpack },
-  { href: "/pets", i18nKey: "pets", icon: Cat },
-  { href: "/quests", i18nKey: "quests", icon: Swords },
-  { href: "/achievements", i18nKey: "achievements", icon: Trophy },
-  { href: "/leaderboard", i18nKey: "leaderboard", icon: Crown },
+const NAV_ITEMS: { href: string; i18nKey: DictionaryKey; icon: React.ComponentType<{ className?: string }>; color: string }[] = [
+  { href: "/dashboard", i18nKey: "dashboard", icon: LayoutDashboard, color: "#a78bfa" },
+  { href: "/problems", i18nKey: "problems", icon: Code, color: "#22d3ee" },
+  { href: "/map", i18nKey: "map", icon: Map, color: "#60a5fa" },
+  { href: "/inventory", i18nKey: "inventory", icon: Backpack, color: "#f472b6" },
+  { href: "/pets", i18nKey: "pets", icon: Cat, color: "#a3e635" },
+  { href: "/quests", i18nKey: "quests", icon: Swords, color: "#f87171" },
+  { href: "/achievements", i18nKey: "achievements", icon: Trophy, color: "#fbbf24" },
+  { href: "/leaderboard", i18nKey: "leaderboard", icon: Crown, color: "#fb923c" },
 ];
 
 export function Sidebar() {
@@ -57,20 +57,30 @@ export function Sidebar() {
     <motion.aside
       initial={false}
       animate={{ width: sidebarOpen ? 240 : 64 }}
-      className="fixed left-0 top-0 z-40 flex h-screen flex-col border-r border-sidebar-border bg-sidebar"
+      transition={{ duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
+      className="fixed left-0 top-0 z-40 flex h-screen flex-col border-r border-sidebar-border bg-sidebar/95 backdrop-blur-xl"
     >
       {/* Logo */}
       <div className="flex h-16 items-center gap-3 border-b border-sidebar-border px-4">
-        <Flame className="h-6 w-6 shrink-0 text-primary" />
-        {sidebarOpen && (
-          <motion.span
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="text-sm font-bold tracking-tight"
-          >
-            Code Adventure
-          </motion.span>
-        )}
+        <motion.div
+          whileHover={{ rotate: [0, -10, 10, 0] }}
+          transition={{ duration: 0.4 }}
+        >
+          <Flame className="h-6 w-6 shrink-0 text-neon-orange" />
+        </motion.div>
+        <AnimatePresence>
+          {sidebarOpen && (
+            <motion.span
+              initial={{ opacity: 0, x: -8 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -8 }}
+              transition={{ duration: 0.2 }}
+              className="font-pixel text-[9px] tracking-wider text-gradient-fire whitespace-nowrap"
+            >
+              CODE BATTLE
+            </motion.span>
+          )}
+        </AnimatePresence>
       </div>
 
       {/* Nav */}
@@ -79,62 +89,78 @@ export function Sidebar() {
           const isActive = pathname === item.href;
           return (
             <Link key={item.href} href={item.href}>
-              <div
+              <motion.div
+                whileHover={{ x: 2 }}
+                whileTap={{ scale: 0.97 }}
                 className={cn(
-                  "flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-all duration-200",
+                  "relative flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-all duration-200",
                   isActive
-                    ? "bg-sidebar-accent text-sidebar-primary"
-                    : "text-sidebar-foreground/70 hover:bg-sidebar-accent/50 hover:text-sidebar-foreground"
+                    ? "bg-primary/10 text-foreground"
+                    : "text-muted-foreground hover:bg-accent/50 hover:text-foreground"
                 )}
               >
-                <item.icon className="h-5 w-5 shrink-0" />
-                {sidebarOpen && (
-                  <motion.span
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                  >
-                    {t(item.i18nKey)}
-                  </motion.span>
-                )}
-                {isActive && sidebarOpen && (
+                {isActive && (
                   <motion.div
-                    layoutId="activeNav"
-                    className="absolute left-0 h-8 w-1 rounded-r-full bg-primary"
-                    transition={{ type: "spring", bounce: 0.2 }}
+                    layoutId="sidebar-active"
+                    className="absolute left-0 top-1/2 -translate-y-1/2 h-6 w-1 rounded-r-full"
+                    style={{ background: item.color }}
+                    transition={{ type: "spring", bounce: 0.15, duration: 0.5 }}
                   />
                 )}
-              </div>
+                <item.icon
+                  className="h-5 w-5 shrink-0 transition-colors duration-200"
+                  style={isActive ? { color: item.color } : undefined}
+                />
+                <AnimatePresence>
+                  {sidebarOpen && (
+                    <motion.span
+                      initial={{ opacity: 0, x: -8 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, x: -8 }}
+                      transition={{ duration: 0.15 }}
+                    >
+                      {t(item.i18nKey)}
+                    </motion.span>
+                  )}
+                </AnimatePresence>
+              </motion.div>
             </Link>
           );
         })}
         {isAdmin && (
           <Link href="/admin">
-            <div
+            <motion.div
+              whileHover={{ x: 2 }}
+              whileTap={{ scale: 0.97 }}
               className={cn(
-                "flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-all duration-200 mt-4 border-t border-sidebar-border pt-4",
+                "relative flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-all duration-200 mt-4 border-t border-sidebar-border pt-4",
                 pathname === "/admin"
-                  ? "bg-sidebar-accent text-sidebar-primary"
-                  : "text-sidebar-foreground/70 hover:bg-sidebar-accent/50 hover:text-sidebar-foreground"
+                  ? "bg-destructive/10 text-destructive"
+                  : "text-muted-foreground hover:bg-accent/50 hover:text-foreground"
               )}
             >
-              <Shield className="h-5 w-5 shrink-0 text-destructive" />
-              {sidebarOpen && (
-                <motion.span
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  className="text-destructive font-bold"
-                >
-                  {t("admin")}
-                </motion.span>
-              )}
-              {pathname === "/admin" && sidebarOpen && (
+              {pathname === "/admin" && (
                 <motion.div
-                  layoutId="activeNav"
-                  className="absolute left-0 h-8 w-1 rounded-r-full bg-destructive"
-                  transition={{ type: "spring", bounce: 0.2 }}
+                  layoutId="sidebar-active"
+                  className="absolute left-0 top-1/2 -translate-y-1/2 h-6 w-1 rounded-r-full bg-destructive"
+                  transition={{ type: "spring", bounce: 0.15, duration: 0.5 }}
                 />
               )}
-            </div>
+              <Shield className="h-5 w-5 shrink-0 text-destructive" />
+              <AnimatePresence>
+                {sidebarOpen && (
+                  <motion.span
+                    initial={{ opacity: 0, x: -8 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -8 }}
+                    transition={{ duration: 0.15 }}
+                    className="text-destructive font-bold"
+                  >
+                    {t("admin")}
+                  </motion.span>
+                )}
+              </AnimatePresence>
+            </motion.div>
           </Link>
         )}
       </nav>

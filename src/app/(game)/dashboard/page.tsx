@@ -6,7 +6,6 @@ import { useQuery } from "@tanstack/react-query";
 import { createClient } from "@/lib/supabase/client";
 import { useGameStore } from "@/stores/game-store";
 import { useI18nStore } from "@/stores/i18n-store";
-import { DictionaryKey } from "@/i18n/dictionaries";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { CharacterShowcase } from "@/components/game/character-showcase";
@@ -21,6 +20,7 @@ import {
   Flame,
   Swords,
   TrendingUp,
+  Backpack,
 } from "lucide-react";
 
 const container = {
@@ -50,17 +50,18 @@ function QuickAction({
   return (
     <Link href={href}>
       <motion.div
-        whileHover={{ scale: 1.05, y: -2 }}
+        whileHover={{ scale: 1.05, y: -4 }}
         whileTap={{ scale: 0.95 }}
-        className="glass flex flex-col items-center gap-2 rounded-xl p-4 transition-all hover:border-primary/30"
+        className="glass-strong flex flex-col items-center gap-3 rounded-xl p-5 transition-all hover:border-primary/40 relative group overflow-hidden"
       >
+        <div className="absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity" style={{ background: color }} />
         <div
-          className="flex h-10 w-10 items-center justify-center rounded-lg"
-          style={{ background: color }}
+          className="flex h-12 w-12 items-center justify-center rounded-xl shadow-md"
+          style={{ background: `linear-gradient(135deg, ${color}, ${color}80)` }}
         >
-          <Icon className="h-5 w-5 text-white" />
+          <Icon className="h-6 w-6 text-white" />
         </div>
-        <span className="text-xs font-medium">{label}</span>
+        <span className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground group-hover:text-foreground">{label}</span>
       </motion.div>
     </Link>
   );
@@ -145,13 +146,19 @@ export default function DashboardPage() {
   if (!charData) {
     return (
       <FadeIn className="flex flex-col items-center justify-center py-24">
-        <div className="mb-4 text-6xl">⚔️</div>
-        <h2 className="mb-2 text-2xl font-bold">{t("noCharacter")}</h2>
-        <p className="mb-6 text-muted-foreground">
+        <motion.div
+          animate={{ y: [0, -10, 0] }}
+          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+          className="mb-6 text-7xl drop-shadow-lg"
+        >
+          ⚔️
+        </motion.div>
+        <h2 className="mb-2 font-pixel text-xl text-gradient-purple">{t("noCharacter")}</h2>
+        <p className="mb-8 text-muted-foreground text-sm">
           {t("createCharacter")}
         </p>
         <Link href="/character/create">
-          <Button variant="game" size="lg">
+          <Button variant="game" size="xl" className="font-pixel-accent text-sm">
             {t("createBtn")}
           </Button>
         </Link>
@@ -164,17 +171,20 @@ export default function DashboardPage() {
       variants={container}
       initial="hidden"
       animate="show"
-      className="space-y-6"
+      className="space-y-8"
     >
       {/* Welcome */}
-      <motion.div variants={item}>
-        <h1 className="text-2xl font-bold">
+      <motion.div variants={item} className="relative overflow-hidden rounded-2xl border border-primary/20 bg-gradient-to-r from-primary/10 to-transparent p-6 sm:p-8">
+        <h1 className="font-pixel text-xl sm:text-2xl mb-2">
           {t("welcomeBack")},{" "}
           <span className="text-gradient-purple">{charData.name}</span>
         </h1>
-        <p className="text-sm text-muted-foreground">
+        <p className="text-sm text-muted-foreground font-medium">
           {t("continueAdventure")}
         </p>
+        <div className="absolute -right-4 -bottom-4 text-8xl opacity-10 blur-sm pointer-events-none">
+          🐉
+        </div>
       </motion.div>
 
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -185,25 +195,25 @@ export default function DashboardPage() {
 
         {/* EXP */}
         <motion.div variants={item}>
-          <Card className="h-full">
-            <CardHeader className="pb-3">
-              <CardTitle className="flex items-center gap-2 text-lg">
-                <TrendingUp className="h-5 w-5 text-exp" />
-                {t("progress")}
+          <Card className="h-full border-primary/20 bg-gradient-to-br from-card to-card/50" glow>
+            <CardHeader className="pb-4">
+              <CardTitle className="flex items-center gap-2 text-base">
+                <TrendingUp className="h-5 w-5 text-emerald-400" />
+                <span className="font-bold text-gradient-green">{t("progress")}</span>
               </CardTitle>
             </CardHeader>
-            <CardContent className="space-y-4">
+            <CardContent className="space-y-6">
               <ExpBar exp={charData.exp} />
-              <div className="grid grid-cols-2 gap-3">
-                <div className="rounded-lg bg-secondary p-3 text-center">
-                  <p className="text-2xl font-bold">{stats?.problemsSolved || 0}</p>
-                  <p className="text-xs text-muted-foreground">{t("solved")}</p>
+              <div className="grid grid-cols-2 gap-4">
+                <div className="rounded-xl border border-border/50 bg-secondary/50 p-4 text-center transition-colors hover:border-primary/30">
+                  <p className="text-3xl font-bold font-pixel-accent text-primary">{stats?.problemsSolved || 0}</p>
+                  <p className="mt-1 text-[10px] font-bold uppercase tracking-wider text-muted-foreground">{t("solved")}</p>
                 </div>
-                <div className="rounded-lg bg-secondary p-3 text-center">
-                  <p className="text-2xl font-bold">
+                <div className="rounded-xl border border-border/50 bg-secondary/50 p-4 text-center transition-colors hover:border-amber-500/30">
+                  <p className="text-3xl font-bold font-pixel-accent text-amber-500">
                     {stats?.achievementsUnlocked || 0}
                   </p>
-                  <p className="text-xs text-muted-foreground">{t("unlocked")}</p>
+                  <p className="mt-1 text-[10px] font-bold uppercase tracking-wider text-muted-foreground">{t("unlocked")}</p>
                 </div>
               </div>
             </CardContent>
@@ -213,24 +223,24 @@ export default function DashboardPage() {
 
       {/* Quick Actions */}
       <motion.div variants={item}>
-        <h2 className="mb-4 text-lg font-semibold">{t("quickActions")}</h2>
-        <div className="grid grid-cols-3 gap-3 sm:grid-cols-6">
+        <h2 className="mb-5 font-pixel text-sm sm:text-base text-muted-foreground">[{t("quickActions")}]</h2>
+        <div className="grid grid-cols-3 gap-4 sm:grid-cols-6">
           <QuickAction href="/problems" icon={Code} label={t("problems")} color="#8b5cf6" />
           <QuickAction href="/map" icon={Map} label={t("map")} color="#3b82f6" />
           <QuickAction href="/quests" icon={Swords} label={t("quests")} color="#ef4444" />
           <QuickAction href="/achievements" icon={Trophy} label={t("achievements")} color="#f59e0b" />
           <QuickAction href="/leaderboard" icon={Flame} label={t("leaderboard")} color="#10b981" />
-          <QuickAction href="/inventory" icon={Swords} label={t("inventory")} color="#ec4899" />
+          <QuickAction href="/inventory" icon={Backpack} label={t("inventory")} color="#ec4899" />
         </div>
       </motion.div>
 
       {/* Daily Quests placeholder */}
       <motion.div variants={item}>
-        <Card>
+        <Card className="border-red-500/20 bg-gradient-to-br from-card to-red-500/5">
           <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-lg">
-              <Swords className="h-5 w-5 text-destructive" />
-              {t("dailyQuests")}
+            <CardTitle className="flex items-center gap-2 text-base">
+              <Swords className="h-5 w-5 text-red-500" />
+              <span className="font-bold text-gradient-fire">{t("dailyQuests")}</span>
             </CardTitle>
           </CardHeader>
           <CardContent>
@@ -238,14 +248,14 @@ export default function DashboardPage() {
               {["Solve 3 problems", "Earn 50 EXP", "Submit 5 solutions"].map(
                 (quest, i) => (
                   <SlideUp key={quest} delay={i * 0.1}>
-                    <div className="flex items-center justify-between rounded-lg bg-secondary/50 p-3">
-                      <div className="flex items-center gap-3">
-                        <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary/20 text-sm">
+                    <div className="group flex items-center justify-between rounded-xl border border-border/50 bg-secondary/30 p-4 transition-colors hover:border-red-500/30 hover:bg-red-500/5">
+                      <div className="flex items-center gap-4">
+                        <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-red-500/10 text-lg shadow-inner">
                           📜
                         </div>
-                        <span className="text-sm font-medium">{quest}</span>
+                        <span className="text-sm font-bold group-hover:text-red-400 transition-colors">{quest}</span>
                       </div>
-                      <span className="text-xs text-muted-foreground">
+                      <span className="font-pixel-accent text-xs text-muted-foreground">
                         0/{i === 0 ? 3 : i === 1 ? 50 : 5}
                       </span>
                     </div>

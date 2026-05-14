@@ -13,15 +13,18 @@ export default function GameLayout({
   const sidebarOpen = useUIStore((s) => s.sidebarOpen);
 
   return (
-    <div className="flex min-h-screen">
+    <div className="flex min-h-screen bg-background">
       <Sidebar />
       <motion.main
         initial={false}
         animate={{ marginLeft: sidebarOpen ? 240 : 64 }}
-        className="flex flex-1 flex-col"
+        transition={{ duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
+        className="flex flex-1 flex-col min-w-0"
       >
         <Header />
-        <div className="flex-1 p-6">{children}</div>
+        <div className="flex-1 p-4 sm:p-6 lg:p-8">
+          {children}
+        </div>
       </motion.main>
     </div>
   );

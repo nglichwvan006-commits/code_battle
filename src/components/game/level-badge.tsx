@@ -20,7 +20,8 @@ export function LevelBadge({ exp, size = "md" }: LevelBadgeProps) {
   return (
     <motion.div
       whileHover={{ scale: 1.1, rotate: 5 }}
-      className={`flex items-center justify-center rounded-full border-2 border-primary bg-primary/20 font-bold text-primary ${sizeMap[size]}`}
+      whileTap={{ scale: 0.95 }}
+      className={`flex items-center justify-center rounded-xl border-2 border-primary/30 bg-gradient-to-br from-primary/20 to-primary/5 font-bold text-primary shadow-sm ${sizeMap[size]}`}
     >
       {level}
     </motion.div>

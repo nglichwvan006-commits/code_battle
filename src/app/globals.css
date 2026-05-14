@@ -51,18 +51,22 @@
   --font-pixel-ui: var(--font-pixel-secondary);
   --font-pixel-accent: var(--font-pixel-accent);
 
-  /* RPG Custom Colors (Action Style) */
+  /* RPG Neon Palette */
   --color-gold: var(--gold);
   --color-gold-foreground: var(--gold-foreground);
   --color-exp: var(--exp);
   --color-exp-foreground: var(--exp-foreground);
   --color-hp: var(--hp);
   --color-mana: var(--mana);
-  --color-neon-purple: oklch(0.65 0.25 280);
-  --color-neon-cyan: oklch(0.75 0.15 200);
-  --color-neon-pink: oklch(0.65 0.25 340);
-  --color-neon-gold: oklch(0.80 0.20 85);
-  
+  --color-neon-purple: #c084fc;
+  --color-neon-cyan: #22d3ee;
+  --color-neon-pink: #f472b6;
+  --color-neon-gold: #fbbf24;
+  --color-neon-lime: #a3e635;
+  --color-neon-orange: #fb923c;
+  --color-neon-red: #f87171;
+  --color-neon-blue: #60a5fa;
+
   --color-rarity-common: var(--rarity-common);
   --color-rarity-uncommon: var(--rarity-uncommon);
   --color-rarity-rare: var(--rarity-rare);
@@ -74,121 +78,119 @@
 }
 
 /* ==============================
-   DARK RPG THEME (default)
+   LIGHT THEME
    ============================== */
 
 :root {
-  --background: oklch(0.98 0.01 280);
-  --foreground: oklch(0.14 0.02 280);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.14 0.02 280);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.14 0.02 280);
-  --primary: oklch(0.60 0.18 280);
-  --primary-foreground: oklch(0.98 0.01 280);
-  --secondary: oklch(0.96 0.01 280);
-  --secondary-foreground: oklch(0.20 0.02 280);
-  --muted: oklch(0.96 0.01 280);
-  --muted-foreground: oklch(0.55 0.02 280);
-  --accent: oklch(0.94 0.02 280);
-  --accent-foreground: oklch(0.14 0.02 280);
-  --destructive: oklch(0.55 0.20 25);
-  --destructive-foreground: oklch(0.98 0.01 25);
-  --border: oklch(0.90 0.02 280);
-  --input: oklch(0.90 0.02 280);
-  --ring: oklch(0.60 0.18 280);
+  --background: #faf7ff;
+  --foreground: #1a1025;
+  --card: #ffffff;
+  --card-foreground: #1a1025;
+  --popover: #ffffff;
+  --popover-foreground: #1a1025;
+  --primary: #8b5cf6;
+  --primary-foreground: #faf7ff;
+  --secondary: #f0e6ff;
+  --secondary-foreground: #2d1b4e;
+  --muted: #f0e6ff;
+  --muted-foreground: #7c6f8e;
+  --accent: #ede4ff;
+  --accent-foreground: #1a1025;
+  --destructive: #ef4444;
+  --destructive-foreground: #fff;
+  --border: #e0d4f0;
+  --input: #e0d4f0;
+  --ring: #8b5cf6;
 
-  /* Charts */
-  --chart-1: oklch(0.60 0.18 280);
-  --chart-2: oklch(0.55 0.15 160);
-  --chart-3: oklch(0.65 0.12 60);
-  --chart-4: oklch(0.50 0.18 320);
-  --chart-5: oklch(0.60 0.15 30);
+  --chart-1: #8b5cf6;
+  --chart-2: #22d3ee;
+  --chart-3: #fbbf24;
+  --chart-4: #f472b6;
+  --chart-5: #a3e635;
 
-  /* Sidebar */
-  --sidebar: oklch(0.98 0.01 280);
-  --sidebar-foreground: oklch(0.14 0.02 280);
-  --sidebar-primary: oklch(0.60 0.18 280);
-  --sidebar-primary-foreground: oklch(0.98 0.01 280);
-  --sidebar-accent: oklch(0.94 0.02 280);
-  --sidebar-accent-foreground: oklch(0.14 0.02 280);
-  --sidebar-border: oklch(0.90 0.02 280);
-  --sidebar-ring: oklch(0.60 0.18 280);
+  --sidebar: #f5f0ff;
+  --sidebar-foreground: #1a1025;
+  --sidebar-primary: #8b5cf6;
+  --sidebar-primary-foreground: #faf7ff;
+  --sidebar-accent: #ede4ff;
+  --sidebar-accent-foreground: #1a1025;
+  --sidebar-border: #e0d4f0;
+  --sidebar-ring: #8b5cf6;
 
-  --radius: 0.75rem;
+  --radius: 0.5rem;
 
-  /* RPG-specific */
-  --gold: oklch(0.70 0.16 85);
-  --gold-foreground: oklch(0.98 0.01 85);
-  --exp: oklch(0.55 0.20 145);
-  --exp-foreground: oklch(0.98 0.01 145);
-  --hp: oklch(0.55 0.22 25);
-  --mana: oklch(0.50 0.22 260);
-  --rarity-common: oklch(0.50 0.02 280);
-  --rarity-uncommon: oklch(0.55 0.18 145);
-  --rarity-rare: oklch(0.50 0.22 260);
-  --rarity-epic: oklch(0.50 0.22 310);
-  --rarity-legendary: oklch(0.65 0.16 65);
-  --difficulty-easy: oklch(0.55 0.18 145);
-  --difficulty-medium: oklch(0.65 0.16 85);
-  --difficulty-hard: oklch(0.55 0.22 25);
+  --gold: #f59e0b;
+  --gold-foreground: #fef3c7;
+  --exp: #10b981;
+  --exp-foreground: #d1fae5;
+  --hp: #ef4444;
+  --mana: #3b82f6;
+  --rarity-common: #9ca3af;
+  --rarity-uncommon: #22c55e;
+  --rarity-rare: #3b82f6;
+  --rarity-epic: #a855f7;
+  --rarity-legendary: #f59e0b;
+  --difficulty-easy: #22c55e;
+  --difficulty-medium: #f59e0b;
+  --difficulty-hard: #ef4444;
 }
 
+/* ==============================
+   DARK RPG THEME
+   ============================== */
+
 .dark {
-  --background: oklch(0.12 0.02 280);
-  --foreground: oklch(0.95 0.01 280);
-  --card: oklch(0.16 0.025 280);
-  --card-foreground: oklch(0.95 0.01 280);
-  --popover: oklch(0.16 0.025 280);
-  --popover-foreground: oklch(0.95 0.01 280);
-  --primary: oklch(0.70 0.18 280);
-  --primary-foreground: oklch(0.98 0.005 280);
-  --secondary: oklch(0.22 0.03 280);
-  --secondary-foreground: oklch(0.90 0.01 280);
-  --muted: oklch(0.20 0.02 280);
-  --muted-foreground: oklch(0.60 0.02 280);
-  --accent: oklch(0.25 0.04 280);
-  --accent-foreground: oklch(0.95 0.01 280);
-  --destructive: oklch(0.55 0.20 25);
-  --destructive-foreground: oklch(0.98 0.005 25);
-  --border: oklch(0.25 0.03 280);
-  --input: oklch(0.22 0.03 280);
-  --ring: oklch(0.70 0.18 280);
+  --background: #0a0612;
+  --foreground: #ede4ff;
+  --card: #13091f;
+  --card-foreground: #ede4ff;
+  --popover: #13091f;
+  --popover-foreground: #ede4ff;
+  --primary: #a78bfa;
+  --primary-foreground: #0a0612;
+  --secondary: #1e1035;
+  --secondary-foreground: #d4c4f0;
+  --muted: #1e1035;
+  --muted-foreground: #8b7fa0;
+  --accent: #251540;
+  --accent-foreground: #ede4ff;
+  --destructive: #f87171;
+  --destructive-foreground: #0a0612;
+  --border: #2d1b4e;
+  --input: #1e1035;
+  --ring: #a78bfa;
 
-  /* Charts */
-  --chart-1: oklch(0.70 0.18 280);
-  --chart-2: oklch(0.65 0.15 160);
-  --chart-3: oklch(0.75 0.12 60);
-  --chart-4: oklch(0.60 0.18 320);
-  --chart-5: oklch(0.70 0.15 30);
+  --chart-1: #a78bfa;
+  --chart-2: #22d3ee;
+  --chart-3: #fbbf24;
+  --chart-4: #f472b6;
+  --chart-5: #a3e635;
 
-  /* Sidebar */
-  --sidebar: oklch(0.14 0.025 280);
-  --sidebar-foreground: oklch(0.90 0.01 280);
-  --sidebar-primary: oklch(0.70 0.18 280);
-  --sidebar-primary-foreground: oklch(0.98 0.005 280);
-  --sidebar-accent: oklch(0.22 0.04 280);
-  --sidebar-accent-foreground: oklch(0.95 0.01 280);
-  --sidebar-border: oklch(0.25 0.03 280);
-  --sidebar-ring: oklch(0.70 0.18 280);
+  --sidebar: #0d0718;
+  --sidebar-foreground: #d4c4f0;
+  --sidebar-primary: #a78bfa;
+  --sidebar-primary-foreground: #0a0612;
+  --sidebar-accent: #1e1035;
+  --sidebar-accent-foreground: #ede4ff;
+  --sidebar-border: #2d1b4e;
+  --sidebar-ring: #a78bfa;
 
-  --radius: 0.75rem;
+  --radius: 0.5rem;
 
-  /* RPG-specific (More Vibrant) */
-  --gold: oklch(0.85 0.22 85);
-  --gold-foreground: oklch(0.20 0.04 85);
-  --exp: oklch(0.75 0.25 145);
-  --exp-foreground: oklch(0.10 0.05 145);
-  --hp: oklch(0.65 0.28 25);
-  --mana: oklch(0.65 0.28 260);
-  --rarity-common: oklch(0.70 0.02 280);
-  --rarity-uncommon: oklch(0.75 0.22 145);
-  --rarity-rare: oklch(0.70 0.25 260);
-  --rarity-epic: oklch(0.70 0.25 310);
-  --rarity-legendary: oklch(0.85 0.20 65);
-  --difficulty-easy: oklch(0.75 0.22 145);
-  --difficulty-medium: oklch(0.85 0.20 85);
-  --difficulty-hard: oklch(0.65 0.28 25);
+  --gold: #fbbf24;
+  --gold-foreground: #1a1025;
+  --exp: #34d399;
+  --exp-foreground: #064e3b;
+  --hp: #f87171;
+  --mana: #60a5fa;
+  --rarity-common: #9ca3af;
+  --rarity-uncommon: #4ade80;
+  --rarity-rare: #60a5fa;
+  --rarity-epic: #c084fc;
+  --rarity-legendary: #fbbf24;
+  --difficulty-easy: #4ade80;
+  --difficulty-medium: #fbbf24;
+  --difficulty-hard: #f87171;
 }
 
 /* ==============================
@@ -197,6 +199,7 @@
 
 * {
   border-color: var(--border);
+  image-rendering: auto;
 }
 
 body {
@@ -207,75 +210,169 @@ body {
 
 /* Custom scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: oklch(0.14 0.02 280);
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: oklch(0.30 0.03 280);
-  border-radius: 4px;
+  background: var(--border);
+  border-radius: 999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: oklch(0.40 0.04 280);
+  background: var(--primary);
 }
 
-/* Glow effects */
+/* ==============================
+   PIXEL FONT UTILITIES
+   ============================== */
+
+.font-pixel { font-family: var(--font-pixel), monospace; }
+.font-pixel-ui { font-family: var(--font-pixel-ui), monospace; }
+.font-pixel-accent { font-family: var(--font-pixel-accent), monospace; }
+
+/* ==============================
+   NEON GLOW EFFECTS
+   ============================== */
+
 .glow-purple {
-  box-shadow: 0 0 20px oklch(0.50 0.18 280 / 0.3),
-              0 0 40px oklch(0.50 0.18 280 / 0.1);
+  box-shadow:
+    0 0 8px #a78bfa40,
+    0 0 24px #a78bfa20,
+    inset 0 0 8px #a78bfa10;
 }
 
 .glow-gold {
-  box-shadow: 0 0 20px oklch(0.70 0.16 85 / 0.3),
-              0 0 40px oklch(0.70 0.16 85 / 0.1);
+  box-shadow:
+    0 0 8px #fbbf2440,
+    0 0 24px #fbbf2420,
+    inset 0 0 8px #fbbf2410;
 }
 
 .glow-green {
-  box-shadow: 0 0 20px oklch(0.55 0.18 145 / 0.3),
-              0 0 40px oklch(0.55 0.18 145 / 0.1);
+  box-shadow:
+    0 0 8px #34d39940,
+    0 0 24px #34d39920,
+    inset 0 0 8px #34d39910;
 }
 
-/* Glassmorphism */
+.glow-cyan {
+  box-shadow:
+    0 0 8px #22d3ee40,
+    0 0 24px #22d3ee20,
+    inset 0 0 8px #22d3ee10;
+}
+
+.glow-pink {
+  box-shadow:
+    0 0 8px #f472b640,
+    0 0 24px #f472b620,
+    inset 0 0 8px #f472b610;
+}
+
+.glow-red {
+  box-shadow:
+    0 0 8px #f8717140,
+    0 0 24px #f8717120,
+    inset 0 0 8px #f8717110;
+}
+
+/* ==============================
+   GLASS MORPHISM
+   ============================== */
+
 .glass {
-  background: oklch(0.16 0.025 280 / 0.6);
-  backdrop-filter: blur(16px);
-  border: 1px solid oklch(0.30 0.03 280 / 0.3);
+  background: color-mix(in srgb, var(--card) 60%, transparent);
+  backdrop-filter: blur(16px) saturate(1.4);
+  border: 1px solid color-mix(in srgb, var(--border) 40%, transparent);
 }
 
 .glass-strong {
-  background: oklch(0.16 0.025 280 / 0.8);
-  backdrop-filter: blur(24px);
-  border: 1px solid oklch(0.30 0.03 280 / 0.5);
+  background: color-mix(in srgb, var(--card) 85%, transparent);
+  backdrop-filter: blur(24px) saturate(1.6);
+  border: 1px solid color-mix(in srgb, var(--border) 60%, transparent);
 }
 
-/* Text gradients */
+/* ==============================
+   TEXT GRADIENTS
+   ============================== */
+
 .text-gradient-purple {
-  background: linear-gradient(135deg, oklch(0.70 0.18 280), oklch(0.65 0.15 320));
+  background: linear-gradient(135deg, #c084fc, #818cf8);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 .text-gradient-gold {
-  background: linear-gradient(135deg, oklch(0.80 0.16 85), oklch(0.75 0.18 55));
+  background: linear-gradient(135deg, #fbbf24, #f97316);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 .text-gradient-green {
-  background: linear-gradient(135deg, oklch(0.65 0.20 145), oklch(0.60 0.18 160));
+  background: linear-gradient(135deg, #34d399, #22d3ee);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
-/* Animated background gradient */
+.text-gradient-pink {
+  background: linear-gradient(135deg, #f472b6, #c084fc);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-gradient-fire {
+  background: linear-gradient(135deg, #f87171, #fb923c, #fbbf24);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-gradient-cyber {
+  background: linear-gradient(135deg, #22d3ee, #a3e635);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ==============================
+   PIXEL CARD SYSTEM
+   ============================== */
+
+.pixel-card {
+  background: var(--card);
+  border: 3px solid var(--border);
+  box-shadow:
+    6px 6px 0 color-mix(in srgb, var(--border) 60%, transparent);
+  transition: all 0.2s ease;
+}
+
+.pixel-card:hover {
+  transform: translate(-2px, -2px);
+  box-shadow:
+    8px 8px 0 color-mix(in srgb, var(--primary) 30%, transparent);
+}
+
+.pixel-border {
+  border: 3px solid currentColor;
+}
+
+.pixel-border-sm {
+  border: 2px solid currentColor;
+}
+
+/* ==============================
+   ANIMATIONS — SMOOTH & GENZ
+   ============================== */
+
 @keyframes gradient-shift {
   0%, 100% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
@@ -283,125 +380,190 @@ body {
 
 .animate-gradient {
   background-size: 200% 200%;
-  animation: gradient-shift 8s ease infinite;
+  animation: gradient-shift 6s ease infinite;
 }
 
-/* Float animation */
 @keyframes float {
   0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
+  50% { transform: translateY(-12px); }
 }
 
 .animate-float {
-  animation: float 3s ease-in-out infinite;
+  animation: float 3s cubic-bezier(0.37, 0, 0.63, 1) infinite;
 }
 
-/* Pulse glow */
 @keyframes pulse-glow {
-  0%, 100% { box-shadow: 0 0 10px oklch(0.50 0.18 280 / 0.2); }
-  50% { box-shadow: 0 0 30px oklch(0.50 0.18 280 / 0.5), 0 0 60px oklch(0.50 0.18 280 / 0.2); }
+  0%, 100% {
+    box-shadow: 0 0 8px #a78bfa30;
+    filter: brightness(1);
+  }
+  50% {
+    box-shadow: 0 0 20px #a78bfa50, 0 0 40px #a78bfa20;
+    filter: brightness(1.05);
+  }
 }
 
 .animate-pulse-glow {
-  animation: pulse-glow 2s ease-in-out infinite;
+  animation: pulse-glow 2.5s ease-in-out infinite;
 }
 
-/* Breathe animation */
 @keyframes breathe {
   0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.02); }
+  50% { transform: scale(1.015); }
 }
 
 .animate-breathe {
   animation: breathe 4s ease-in-out infinite;
 }
 
-/* ==============================
-   PIXEL RPG UTILITIES
-   ============================== */
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
 
-.font-pixel { font-family: var(--font-pixel), cursive; }
-.font-pixel-ui { font-family: var(--font-pixel-ui), sans-serif; }
-.font-pixel-accent { font-family: var(--font-pixel-accent), cursive; }
-
-/* Pixel Borders */
-.pixel-border {
+.shimmer {
   position: relative;
-  border: 4px solid currentColor;
-  box-shadow: 
-    0 -4px 0 -2px currentColor,
-    0 4px 0 -2px currentColor,
-    -4px 0 0 -2px currentColor,
-    4px 0 0 -2px currentColor;
+  overflow: hidden;
 }
 
-.pixel-border-sm {
-  position: relative;
-  border: 2px solid currentColor;
+.shimmer::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.06),
+    transparent
+  );
+  animation: shimmer 2.5s infinite;
 }
 
-.pixel-card {
-  background: var(--card);
-  border: 4px solid var(--border);
-  box-shadow: 
-    4px 0 var(--background),
-    -4px 0 var(--background),
-    0 4px var(--background),
-    0 -4px var(--background),
-    8px 0 var(--border),
-    -8px 0 var(--border),
-    0 8px var(--border),
-    0 -8px var(--border);
+/* Glitch on hover — subtle, GenZ-friendly */
+@keyframes glitch-subtle {
+  0%, 100% { transform: translate(0); }
+  10% { transform: translate(-1px, 1px); }
+  30% { transform: translate(1px, -1px); }
+  50% { transform: translate(-1px, 0); }
+  70% { transform: translate(1px, 1px); }
+  90% { transform: translate(0, -1px); }
 }
 
-/* CRT Scanline Effect */
+.hover-glitch:hover {
+  animation: glitch-subtle 0.4s ease both;
+}
+
+/* Typewriter cursor blink */
+@keyframes cursor-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.animate-cursor {
+  animation: cursor-blink 1s step-end infinite;
+}
+
+/* Entrance: slide up with spring feel */
+@keyframes slide-up-spring {
+  0% {
+    opacity: 0;
+    transform: translateY(20px) scale(0.98);
+  }
+  60% {
+    transform: translateY(-4px) scale(1.01);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.animate-slide-up {
+  animation: slide-up-spring 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+/* Rainbow border animation */
+@keyframes rainbow-border {
+  0% { border-color: #c084fc; }
+  16% { border-color: #22d3ee; }
+  33% { border-color: #a3e635; }
+  50% { border-color: #fbbf24; }
+  66% { border-color: #fb923c; }
+  83% { border-color: #f472b6; }
+  100% { border-color: #c084fc; }
+}
+
+.animate-rainbow-border {
+  animation: rainbow-border 4s linear infinite;
+}
+
+/* Rotate icon */
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 8s linear infinite;
+}
+
+/* CRT Scanline — extremely subtle */
 .crt-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: linear-gradient(
-    rgba(18, 16, 16, 0) 50%,
-    rgba(0, 0, 0, 0.1) 50%
-  ),
-  linear-gradient(
-    90deg,
-    rgba(255, 0, 0, 0.03),
-    rgba(0, 255, 0, 0.01),
-    rgba(0, 0, 255, 0.03)
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.02) 2px,
+    rgba(0, 0, 0, 0.02) 4px
   );
-  background-size: 100% 4px, 3px 100%;
   pointer-events: none;
   z-index: 1000;
-  opacity: 0.3;
 }
 
-/* Glitch Animation */
-@keyframes glitch {
-  0% { transform: translate(0); }
-  20% { transform: translate(-2px, 2px); }
-  40% { transform: translate(-2px, -2px); }
-  60% { transform: translate(2px, 2px); }
-  80% { transform: translate(2px, -2px); }
-  100% { transform: translate(0); }
+.dark .crt-overlay {
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.06) 2px,
+    rgba(0, 0, 0, 0.06) 4px
+  );
 }
 
-.animate-glitch {
-  animation: glitch 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both infinite;
-  animation-play-state: paused;
+/* ==============================
+   BATTLE FX UTILITIES
+   ============================== */
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  10%, 50%, 90% { transform: translateX(-4px); }
+  30%, 70% { transform: translateX(4px); }
 }
 
-.animate-glitch:hover {
-  animation-play-state: running;
+.animate-shake {
+  animation: shake 0.5s ease-in-out;
 }
 
-/* RPG Button Effect */
-.rpg-button-active {
-  transition: transform 0.1s;
+@keyframes damage-flash {
+  0%, 100% { filter: brightness(1); }
+  50% { filter: brightness(2) saturate(0); }
 }
 
-.rpg-button-active:active {
-  transform: translateY(4px);
+.animate-damage {
+  animation: damage-flash 0.3s ease;
 }
 
+/* RPG Button press effect */
+.rpg-press {
+  transition: transform 0.1s, box-shadow 0.1s;
+}
+
+.rpg-press:active {
+  transform: translateY(3px);
+  box-shadow: none !important;
+}
