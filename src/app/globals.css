@@ -47,14 +47,22 @@
 
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-pixel: var(--font-pixel-primary);
+  --font-pixel-ui: var(--font-pixel-secondary);
+  --font-pixel-accent: var(--font-pixel-accent);
 
-  /* RPG Custom Colors */
+  /* RPG Custom Colors (Action Style) */
   --color-gold: var(--gold);
   --color-gold-foreground: var(--gold-foreground);
   --color-exp: var(--exp);
   --color-exp-foreground: var(--exp-foreground);
   --color-hp: var(--hp);
   --color-mana: var(--mana);
+  --color-neon-purple: oklch(0.65 0.25 280);
+  --color-neon-cyan: oklch(0.75 0.15 200);
+  --color-neon-pink: oklch(0.65 0.25 340);
+  --color-neon-gold: oklch(0.80 0.20 85);
+  
   --color-rarity-common: var(--rarity-common);
   --color-rarity-uncommon: var(--rarity-uncommon);
   --color-rarity-rare: var(--rarity-rare);
@@ -166,21 +174,21 @@
 
   --radius: 0.75rem;
 
-  /* RPG-specific */
-  --gold: oklch(0.80 0.16 85);
+  /* RPG-specific (More Vibrant) */
+  --gold: oklch(0.85 0.22 85);
   --gold-foreground: oklch(0.20 0.04 85);
-  --exp: oklch(0.65 0.20 145);
-  --exp-foreground: oklch(0.98 0.005 145);
-  --hp: oklch(0.60 0.22 25);
-  --mana: oklch(0.60 0.22 260);
+  --exp: oklch(0.75 0.25 145);
+  --exp-foreground: oklch(0.10 0.05 145);
+  --hp: oklch(0.65 0.28 25);
+  --mana: oklch(0.65 0.28 260);
   --rarity-common: oklch(0.70 0.02 280);
-  --rarity-uncommon: oklch(0.65 0.18 145);
-  --rarity-rare: oklch(0.60 0.22 260);
-  --rarity-epic: oklch(0.60 0.22 310);
-  --rarity-legendary: oklch(0.78 0.16 65);
-  --difficulty-easy: oklch(0.65 0.18 145);
-  --difficulty-medium: oklch(0.78 0.16 85);
-  --difficulty-hard: oklch(0.60 0.22 25);
+  --rarity-uncommon: oklch(0.75 0.22 145);
+  --rarity-rare: oklch(0.70 0.25 260);
+  --rarity-epic: oklch(0.70 0.25 310);
+  --rarity-legendary: oklch(0.85 0.20 65);
+  --difficulty-easy: oklch(0.75 0.22 145);
+  --difficulty-medium: oklch(0.85 0.20 85);
+  --difficulty-hard: oklch(0.65 0.28 25);
 }
 
 /* ==============================
@@ -308,26 +316,92 @@ body {
   animation: breathe 4s ease-in-out infinite;
 }
 
-/* Shimmer */
-@keyframes shimmer {
-  0% { transform: translateX(-100%); }
-  100% { transform: translateX(100%); }
-}
+/* ==============================
+   PIXEL RPG UTILITIES
+   ============================== */
 
-.shimmer {
+.font-pixel { font-family: var(--font-pixel), cursive; }
+.font-pixel-ui { font-family: var(--font-pixel-ui), sans-serif; }
+.font-pixel-accent { font-family: var(--font-pixel-accent), cursive; }
+
+/* Pixel Borders */
+.pixel-border {
   position: relative;
-  overflow: hidden;
+  border: 4px solid currentColor;
+  box-shadow: 
+    0 -4px 0 -2px currentColor,
+    0 4px 0 -2px currentColor,
+    -4px 0 0 -2px currentColor,
+    4px 0 0 -2px currentColor;
 }
 
-.shimmer::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    oklch(1 0 0 / 0.05),
-    transparent
-  );
-  animation: shimmer 2s infinite;
+.pixel-border-sm {
+  position: relative;
+  border: 2px solid currentColor;
 }
+
+.pixel-card {
+  background: var(--card);
+  border: 4px solid var(--border);
+  box-shadow: 
+    4px 0 var(--background),
+    -4px 0 var(--background),
+    0 4px var(--background),
+    0 -4px var(--background),
+    8px 0 var(--border),
+    -8px 0 var(--border),
+    0 8px var(--border),
+    0 -8px var(--border);
+}
+
+/* CRT Scanline Effect */
+.crt-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(
+    rgba(18, 16, 16, 0) 50%,
+    rgba(0, 0, 0, 0.1) 50%
+  ),
+  linear-gradient(
+    90deg,
+    rgba(255, 0, 0, 0.03),
+    rgba(0, 255, 0, 0.01),
+    rgba(0, 0, 255, 0.03)
+  );
+  background-size: 100% 4px, 3px 100%;
+  pointer-events: none;
+  z-index: 1000;
+  opacity: 0.3;
+}
+
+/* Glitch Animation */
+@keyframes glitch {
+  0% { transform: translate(0); }
+  20% { transform: translate(-2px, 2px); }
+  40% { transform: translate(-2px, -2px); }
+  60% { transform: translate(2px, 2px); }
+  80% { transform: translate(2px, -2px); }
+  100% { transform: translate(0); }
+}
+
+.animate-glitch {
+  animation: glitch 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both infinite;
+  animation-play-state: paused;
+}
+
+.animate-glitch:hover {
+  animation-play-state: running;
+}
+
+/* RPG Button Effect */
+.rpg-button-active {
+  transition: transform 0.1s;
+}
+
+.rpg-button-active:active {
+  transform: translateY(4px);
+}
+

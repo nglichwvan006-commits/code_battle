@@ -86,9 +86,7 @@ export function ParticleBackground({
         const lifeRatio = 1 - p.life / p.maxLife;
         ctx.globalAlpha = p.opacity * lifeRatio;
         ctx.fillStyle = p.color;
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-        ctx.fill();
+        ctx.fillRect(p.x, p.y, p.size, p.size);
       });
 
       animFrameRef.current = requestAnimationFrame(animate);

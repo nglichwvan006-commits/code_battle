@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Press_Start_2P, VT323, Silkscreen } from "next/font/google";
 import { Providers } from "@/components/providers";
 import "./globals.css";
 
@@ -10,6 +10,24 @@ const geistSans = Geist({
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
+  subsets: ["latin"],
+});
+
+const pixelPrimary = Press_Start_2P({
+  weight: "400",
+  variable: "--font-pixel-primary",
+  subsets: ["latin"],
+});
+
+const pixelSecondary = VT323({
+  weight: "400",
+  variable: "--font-pixel-secondary",
+  subsets: ["latin"],
+});
+
+const pixelAccent = Silkscreen({
+  weight: "400",
+  variable: "--font-pixel-accent",
   subsets: ["latin"],
 });
 
@@ -39,10 +57,11 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable}`}
+      className={`${geistSans.variable} ${geistMono.variable} ${pixelPrimary.variable} ${pixelSecondary.variable} ${pixelAccent.variable}`}
       suppressHydrationWarning
     >
-      <body className="min-h-screen bg-background font-sans antialiased">
+      <body className="min-h-screen bg-background font-sans antialiased overflow-x-hidden">
+        <div className="crt-overlay" />
         <Providers>{children}</Providers>
       </body>
     </html>

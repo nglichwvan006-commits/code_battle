@@ -55,7 +55,7 @@ export default function LandingPage() {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8 }}
-            className="mb-4 text-7xl"
+            className="mb-8 text-8xl drop-shadow-[0_0_20px_rgba(168,85,247,0.5)]"
           >
             ⚔️
           </motion.div>
@@ -65,36 +65,36 @@ export default function LandingPage() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.2 }}
-          className="mb-4 max-w-4xl text-5xl font-bold tracking-tight sm:text-7xl"
+          className="mb-6 max-w-4xl font-pixel text-4xl tracking-tight sm:text-6xl animate-glitch"
         >
-          <span className="text-gradient-purple">Code Adventure</span>{" "}
-          <span className="text-gradient-gold">RPG</span>
+          <span className="text-neon-purple drop-shadow-[0_0_15px_rgba(168,85,247,0.5)]">Code Adventure</span><br />
+          <span className="text-neon-gold drop-shadow-[0_0_15px_rgba(234,179,8,0.5)]">BATTLE RPG</span>
         </motion.h1>
 
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.4 }}
-          className="mb-8 max-w-2xl text-lg text-muted-foreground sm:text-xl"
+          className="mb-12 max-w-2xl text-lg font-pixel-ui text-muted-foreground sm:text-xl uppercase tracking-widest"
         >
           Master programming through an epic fantasy adventure. Solve challenges,
-          level up your hero, defeat bosses, and become a coding legend.
+          level up your hero, and become a coding legend.
         </motion.p>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.6 }}
-          className="flex gap-4"
+          className="flex flex-col sm:flex-row gap-6"
         >
           <Link href="/register">
-            <Button variant="game" size="xl">
-              Start Your Adventure
+            <Button variant="pixel-gold" size="pixel" className="text-lg">
+              [ Start Adventure ]
             </Button>
           </Link>
           <Link href="/login">
-            <Button variant="outline" size="xl">
-              Continue Journey
+            <Button variant="pixel-outline" size="pixel" className="text-lg">
+              [ Continue Journey ]
             </Button>
           </Link>
         </motion.div>
@@ -107,13 +107,11 @@ export default function LandingPage() {
           className="absolute bottom-8"
         >
           <motion.div
-            animate={{ y: [0, 8, 0] }}
+            animate={{ y: [0, 10, 0] }}
             transition={{ duration: 1.5, repeat: Infinity }}
-            className="text-muted-foreground"
+            className="text-primary font-pixel text-xl"
           >
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M12 5v14M5 12l7 7 7-7" />
-            </svg>
+            [ V ]
           </motion.div>
         </motion.div>
       </section>
@@ -130,7 +128,7 @@ export default function LandingPage() {
             Your Quest Awaits
           </motion.h2>
 
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {FEATURES.map((feature, i) => (
               <motion.div
                 key={feature.title}
@@ -138,12 +136,12 @@ export default function LandingPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                whileHover={{ y: -4, scale: 1.02 }}
-                className="glass rounded-xl p-6 transition-all"
+                whileHover={{ y: -8 }}
+                className="pixel-card bg-card/80 p-8 transition-all hover:bg-card"
               >
-                <div className="mb-3 text-4xl">{feature.icon}</div>
-                <h3 className="mb-2 text-lg font-semibold">{feature.title}</h3>
-                <p className="text-sm text-muted-foreground">{feature.desc}</p>
+                <div className="mb-4 text-5xl">{feature.icon}</div>
+                <h3 className="mb-3 font-pixel text-xs tracking-tighter text-primary uppercase">{feature.title}</h3>
+                <p className="font-pixel-ui text-md text-muted-foreground leading-relaxed">{feature.desc}</p>
               </motion.div>
             ))}
           </div>
@@ -156,34 +154,34 @@ export default function LandingPage() {
           initial={{ opacity: 0, scale: 0.95 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
-          className="glass-strong mx-auto max-w-2xl rounded-2xl p-12 text-center"
+          className="pixel-card mx-auto max-w-2xl bg-card p-12 text-center"
         >
-          <h2 className="mb-4 text-3xl font-bold">Ready to Begin?</h2>
-          <p className="mb-8 text-muted-foreground">
+          <h2 className="mb-6 font-pixel text-2xl text-neon-pink">Ready to Begin?</h2>
+          <p className="mb-8 font-pixel-ui text-lg text-muted-foreground uppercase tracking-wider">
             Join thousands of adventurers who are leveling up their coding skills.
           </p>
           <Link href="/register">
-            <Button variant="game" size="xl">
-              Create Your Character
+            <Button variant="pixel-danger" size="pixel" className="text-xl px-12 py-6">
+              [ Create Character ]
             </Button>
           </Link>
         </motion.div>
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-border/50 px-4 py-8">
-        <div className="mx-auto flex max-w-6xl items-center justify-between">
-          <p className="text-sm text-muted-foreground">
-            © 2026 Code Adventure RPG
+      <footer className="border-t-4 border-border/30 px-4 py-12">
+        <div className="mx-auto flex max-w-6xl flex-col sm:flex-row items-center justify-between gap-6">
+          <p className="font-pixel-ui text-sm text-muted-foreground uppercase tracking-widest">
+            © 2026 Code Adventure BATTLE RPG
           </p>
-          <div className="flex gap-6 text-sm text-muted-foreground">
-            <Link href="#" className="hover:text-foreground transition-colors">
+          <div className="flex gap-8 font-pixel-ui text-sm text-muted-foreground uppercase tracking-widest">
+            <Link href="#" className="hover:text-neon-cyan transition-colors">
               About
             </Link>
-            <Link href="#" className="hover:text-foreground transition-colors">
+            <Link href="#" className="hover:text-neon-cyan transition-colors">
               Privacy
             </Link>
-            <Link href="#" className="hover:text-foreground transition-colors">
+            <Link href="#" className="hover:text-neon-cyan transition-colors">
               Terms
             </Link>
           </div>

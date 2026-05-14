@@ -13,35 +13,30 @@ const Progress = React.forwardRef<
 
   const variantClasses = {
     default: "bg-primary",
-    exp: "bg-gradient-to-r from-emerald-500 to-green-400",
-    hp: "bg-gradient-to-r from-red-500 to-rose-400",
-    mana: "bg-gradient-to-r from-blue-500 to-indigo-400",
-    gold: "bg-gradient-to-r from-amber-500 to-yellow-400",
+    exp: "bg-exp",
+    hp: "bg-hp",
+    mana: "bg-mana",
+    gold: "bg-gold",
   };
 
   return (
     <div
       ref={ref}
       className={cn(
-        "relative h-3 w-full overflow-hidden rounded-full bg-secondary",
+        "relative h-4 w-full bg-black/40 pixel-border-sm",
         className
       )}
       {...props}
     >
       <div
         className={cn(
-          "h-full rounded-full transition-all duration-500 ease-out",
+          "h-full transition-all duration-300 ease-in-out",
           variantClasses[variant]
         )}
         style={{ width: `${percentage}%` }}
       />
-      {/* Shimmer effect */}
-      <div
-        className="absolute inset-0 overflow-hidden rounded-full"
-        style={{ width: `${percentage}%` }}
-      >
-        <div className="absolute inset-0 animate-[shimmer_2s_infinite] bg-gradient-to-r from-transparent via-white/20 to-transparent" />
-      </div>
+      {/* Glint effect (pixel style) */}
+      <div className="absolute inset-x-0 top-0 h-1 bg-white/20" />
     </div>
   );
 });
