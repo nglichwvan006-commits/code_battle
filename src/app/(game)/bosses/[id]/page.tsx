@@ -72,26 +72,32 @@ export default function BossBattlePage() {
 
       setBattleState("attacking");
 
-      // Submit to Piston API
-      const pistonUrl = "https://emkc.org/api/v2/piston/execute";
+      // Submit to Wandbox API
+      const wandboxUrl = "https://wandbox.org/api/compile.json";
       
-      const response = await fetch(pistonUrl, {
+      const compilerMap: Record<string, string> = {
+        cpp: "gcc-head",
+        python: "cpython-3.14.0",
+        javascript: "nodejs-20.17.0",
+        csharp: "dotnetcore-8.0.402",
+      };
+      
+      const response = await fetch(wandboxUrl, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          language: language === "cpp" ? "cpp" : language === "csharp" ? "csharp" : language,
-          version: "*",
-          files: [{ content: code }],
+          compiler: compilerMap[language] || "cpython-3.14.0",
+          code: code,
           stdin: (boss.problems as any).sample_input || "",
         }),
       });
 
       const result = await response.json();
-      const output = result.run?.stdout || "";
+      const output = result.program_output || result.program_message || "";
       const expectedOutput = (boss.problems as any).sample_output?.trim() || "";
       
-      const isCompileError = result.compile?.code !== 0 && result.compile?.stderr;
-      const isRuntimeError = result.run?.code !== 0 && result.run?.stderr;
+      const isCompileError = !!result.compiler_error;
+      const isRuntimeError = result.status !== "0" && !isCompileError;
       
       const isAccepted = !isCompileError && !isRuntimeError && output.trim() === expectedOutput;
       const status = isAccepted ? "accepted" : "wrong_answer";

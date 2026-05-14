@@ -73,28 +73,34 @@ export default function ProblemDetailPage() {
 
       if (!charRow) throw new Error("No character found");
 
-      // Submit to Piston API (100% Free, No API Key)
-      const pistonUrl = "https://emkc.org/api/v2/piston/execute";
+      // Submit to Wandbox API (100% Free, No API Key, No Whitelist)
+      const wandboxUrl = "https://wandbox.org/api/compile.json";
       
-      const response = await fetch(pistonUrl, {
+      const compilerMap: Record<string, string> = {
+        cpp: "gcc-head",
+        python: "cpython-3.14.0",
+        javascript: "nodejs-20.17.0",
+        csharp: "dotnetcore-8.0.402",
+      };
+      
+      const response = await fetch(wandboxUrl, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          language: language === "cpp" ? "cpp" : language === "csharp" ? "csharp" : language,
-          version: "*",
-          files: [{ content: code }],
+          compiler: compilerMap[language] || "cpython-3.14.0",
+          code: code,
           stdin: problem?.sample_input || "",
         }),
       });
 
       const result = await response.json();
-      const output = result.run?.stdout || "";
-      const error = result.run?.stderr || result.compile?.stderr || "";
+      const output = result.program_output || result.program_message || "";
+      const error = result.program_error || result.compiler_error || "";
       const expectedOutput = problem?.sample_output?.trim() || "";
       const actualOutput = output.trim();
       
-      const isCompileError = result.compile?.code !== 0 && result.compile?.stderr;
-      const isRuntimeError = result.run?.code !== 0 && result.run?.stderr;
+      const isCompileError = !!result.compiler_error;
+      const isRuntimeError = result.status !== "0" && !isCompileError;
       
       let status = "wrong_answer";
       let isAccepted = false;
