@@ -2,6 +2,32 @@
 -- Code Adventure RPG — Initial Schema
 -- =============================================
 
+-- Drop existing tables to avoid conflicts during reset
+DROP TABLE IF EXISTS daily_quests CASCADE;
+DROP TABLE IF EXISTS streaks CASCADE;
+DROP TABLE IF EXISTS boss_progress CASCADE;
+DROP TABLE IF EXISTS bosses CASCADE;
+DROP TABLE IF EXISTS user_pets CASCADE;
+DROP TABLE IF EXISTS pets CASCADE;
+DROP TABLE IF EXISTS user_inventory CASCADE;
+DROP TABLE IF EXISTS inventory_items CASCADE;
+DROP TABLE IF EXISTS user_achievements CASCADE;
+DROP TABLE IF EXISTS achievements CASCADE;
+DROP TABLE IF EXISTS submissions CASCADE;
+DROP TABLE IF EXISTS problems CASCADE;
+DROP TABLE IF EXISTS zones CASCADE;
+DROP TABLE IF EXISTS characters CASCADE;
+DROP TABLE IF EXISTS classes CASCADE;
+DROP TABLE IF EXISTS profiles CASCADE;
+
+-- Drop existing types
+DROP TYPE IF EXISTS user_role CASCADE;
+DROP TYPE IF EXISTS difficulty CASCADE;
+DROP TYPE IF EXISTS rarity CASCADE;
+DROP TYPE IF EXISTS item_type CASCADE;
+DROP TYPE IF EXISTS boss_type CASCADE;
+DROP TYPE IF EXISTS submission_status CASCADE;
+
 -- Enums
 CREATE TYPE user_role AS ENUM ('user', 'admin');
 CREATE TYPE difficulty AS ENUM ('easy', 'medium', 'hard');
