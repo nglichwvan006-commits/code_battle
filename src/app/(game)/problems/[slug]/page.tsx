@@ -71,38 +71,40 @@ export default function ProblemDetailPage() {
 
       if (!charRow) throw new Error("No character found");
 
-      // Submit to Judge0
-      const judge0Url = process.env.NEXT_PUBLIC_JUDGE0_URL;
-      const languageId = JUDGE0_LANGUAGE_IDS[language];
-
-      const response = await fetch(`${judge0Url}/submissions?base64_encoded=false&wait=true`, {
+      // Submit to Piston API (100% Free, No API Key)
+      const pistonUrl = "https://emkc.org/api/v2/piston/execute";
+      
+      const response = await fetch(pistonUrl, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          ...(process.env.JUDGE0_API_KEY
-            ? { "X-RapidAPI-Key": process.env.JUDGE0_API_KEY }
-            : {}),
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          source_code: code,
-          language_id: languageId,
+          language: language === "cpp" ? "cpp" : language === "csharp" ? "csharp" : language,
+          version: "*",
+          files: [{ content: code }],
           stdin: problem?.sample_input || "",
-          expected_output: problem?.sample_output || "",
         }),
       });
 
       const result = await response.json();
-
-      const isAccepted = result.status?.id === 3;
-      const status = isAccepted
-        ? "accepted"
-        : result.status?.id === 4
-        ? "wrong_answer"
-        : result.status?.id === 5
-        ? "time_limit"
-        : result.status?.id === 6
-        ? "compilation_error"
-        : "runtime_error";
+      const output = result.run?.stdout || "";
+      const error = result.run?.stderr || result.compile?.stderr || "";
+      const expectedOutput = problem?.sample_output?.trim() || "";
+      const actualOutput = output.trim();
+      
+      const isCompileError = result.compile?.code !== 0 && result.compile?.stderr;
+      const isRuntimeError = result.run?.code !== 0 && result.run?.stderr;
+      
+      let status = "wrong_answer";
+      let isAccepted = false;
+      
+      if (isCompileError) {
+        status = "compilation_error";
+      } else if (isRuntimeError) {
+        status = "runtime_error";
+      } else if (actualOutput === expectedOutput) {
+        status = "accepted";
+        isAccepted = true;
+      }
 
       // Save submission
       await supabase.from("submissions").insert({
@@ -111,10 +113,10 @@ export default function ProblemDetailPage() {
         code,
         language,
         status,
-        runtime_ms: result.time ? parseFloat(result.time) * 1000 : null,
-        memory_kb: result.memory || null,
-        output: result.stdout || null,
-        error: result.stderr || result.compile_output || null,
+        runtime_ms: null, // Piston doesn't easily expose this in the same way
+        memory_kb: null,
+        output: actualOutput || null,
+        error: error || null,
       });
 
       // Award EXP/Gold if accepted

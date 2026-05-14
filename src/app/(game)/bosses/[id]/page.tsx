@@ -68,28 +68,28 @@ export default function BossBattlePage() {
 
       setBattleState("attacking");
 
-      // Submit to Judge0
-      const judge0Url = process.env.NEXT_PUBLIC_JUDGE0_URL;
-      const languageId = JUDGE0_LANGUAGE_IDS[language];
-
-      const response = await fetch(`${judge0Url}/submissions?base64_encoded=false&wait=true`, {
+      // Submit to Piston API
+      const pistonUrl = "https://emkc.org/api/v2/piston/execute";
+      
+      const response = await fetch(pistonUrl, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          ...(process.env.JUDGE0_API_KEY
-            ? { "X-RapidAPI-Key": process.env.JUDGE0_API_KEY }
-            : {}),
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          source_code: code,
-          language_id: languageId,
+          language: language === "cpp" ? "cpp" : language === "csharp" ? "csharp" : language,
+          version: "*",
+          files: [{ content: code }],
           stdin: (boss.problems as any).sample_input || "",
-          expected_output: (boss.problems as any).sample_output || "",
         }),
       });
 
       const result = await response.json();
-      const isAccepted = result.status?.id === 3;
+      const output = result.run?.stdout || "";
+      const expectedOutput = (boss.problems as any).sample_output?.trim() || "";
+      
+      const isCompileError = result.compile?.code !== 0 && result.compile?.stderr;
+      const isRuntimeError = result.run?.code !== 0 && result.run?.stderr;
+      
+      const isAccepted = !isCompileError && !isRuntimeError && output.trim() === expectedOutput;
       const status = isAccepted ? "accepted" : "wrong_answer";
 
       // Save submission
